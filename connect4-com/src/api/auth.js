@@ -32,3 +32,14 @@ export async function logout() {
     credentials: 'include'
   });
 }
+
+export async function getCurrentUser() {
+  const res = await fetch(`http://localhost:3000/auth/current`, {
+    credentials: 'include'
+  });
+  const data = await res.json();
+  if (!res.ok) {
+    throw new Error(data.error || 'Failed to get user');
+  }
+  return data;
+}

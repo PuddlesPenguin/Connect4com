@@ -32,4 +32,15 @@ function logout(req, res) {
   req.session.destroy(() => res.json({ message: 'Success' }));
 }
 
-module.exports = { register, login, logout };
+async function getCurrentUser(req, res) {
+  if (!req.session.userId) {
+    return res.status(401).json({ error: 'Not authenticated' });
+  }
+  const user = await userModel.findUserById(req.session.userId);
+  if (!user) {
+    return res.status(404).json({ error: 'User not found' });
+  }
+  res.json({ user });
+}
+
+module.exports = { register, login, logout, getCurrentUser };
