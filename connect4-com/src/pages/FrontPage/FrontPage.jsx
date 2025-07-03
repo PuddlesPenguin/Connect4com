@@ -43,9 +43,18 @@ const FrontPage = () => {
           </button>
 
           <HeaderLogoButton icon={PopTextLogo} />
-          <HeaderUserAuthButton text="Login" to="/login" />
-          <HeaderUserAuthButton text="Sign Up" to="/signup" />
-        </Header>
+          <HeaderUserAuthButton
+              text="Login"
+                  to="/login"
+                  bg_color="bg-[#60a7b1]"
+                  hover_color="hover:bg-[#70b7b9]"
+                />
+                <HeaderUserAuthButton
+                  text="Sign Up"
+                  to="/signup"
+                  bg_color="bg-[#537178]"
+                  hover_color="hover:bg-[#638188]"
+                />        </Header>
 
         {/* Mobile sidebar drawer */}
         {sidebarOpen && (
