@@ -1,30 +1,14 @@
-import React from 'react';
-import UserAuthButton from './UserAuthButton';
-
-const Sidebar = ({ children }) => {
-  const allChildren = React.Children.toArray(children);
-  const authButtons = allChildren.filter(
-    (child) => child.type === UserAuthButton
-  );
-  const otherItems = allChildren.filter(
-    (child) => child.type !== UserAuthButton
-  );
-
+const Sidebar = ({ children, authButtons }) => {
   return (
-    <div
-      className="fixed top-0 left-0 h-full w-[250px] z-10 bg-[#46494f] overflow-x-hidden pt-5 flex flex-col"
-    >
-      {/* Top-aligned items */}
+    <div className="fixed top-0 left-0 h-full w-[250px] z-10 bg-[#46494f] overflow-x-hidden pt-5 flex flex-col">
       <div>
-        {otherItems}
+        {children}
       </div>
 
-      {/* Spaced UserAuthButtons */}
-      <div className="mt-[30px]">
+      <div className="pt-[30px]">
         {authButtons}
       </div>
     </div>
   );
 };
-
 export default Sidebar;

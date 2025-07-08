@@ -3,9 +3,23 @@ const express = require('express');
 const session = require('express-session');
 const authRoutes = require('./routes/authRoutes');
 const cors = require('cors');
+const http = require('http');
+const { Server } = require('socket.io');
+const shareSession = require('express-socket.io-session');
 
 const app = express();
+const server = http.createServer(app);
+const sessionMiddleware = session({
+  secret: process.env.SECRET_KEY,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    sameSite: 'lax', // or 'none' if using HTTPS
+    secure: false     // set to true in production with HTTPS
+  }
+});
 app.use(express.json());
+app.use(sessionMiddleware);
 
 app.use(session({
   secret: process.env.SECRET_KEY,
